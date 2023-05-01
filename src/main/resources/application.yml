@@ -1,0 +1,36 @@
+spring:
+  data:
+    redis:
+      host: localhost
+      port: 6379
+
+  datasource:
+    url: jdbc:h2:mem:gallery
+    username: sa
+    password: password
+    driverClassName: org.h2.Driver
+
+  h2:
+    console:
+      enabled: true
+
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: update
+
+  cache:
+    type: redis
+
+  kafka:
+    producer:
+      bootstrap-servers: localhost:9092
+      key-serializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-serializer: org.apache.kafka.common.serialization.StringDeserializer
+
+imgur:
+  client_id: 96977297c28bb0a
+  client_secret: 76d50df7fc770a914c5af4169ee0148ebaf4d390
+  refresh_token: 6afc38ec7b60146d3017d0ae625191692fdef153
+  grant_type: refresh_token
+  host_url: https://api.imgur.com/

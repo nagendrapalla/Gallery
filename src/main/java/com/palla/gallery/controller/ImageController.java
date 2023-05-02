@@ -25,7 +25,7 @@ public class ImageController {
     }
 
     @PostMapping(value = "/upload", consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.MULTIPART_FORM_DATA_VALUE})
-    public ResponseEntity<?> uploadImage(@RequestPart MultipartFile file, @RequestPart String username) {
+    public ResponseEntity<?> uploadImage(@RequestPart MultipartFile file, @RequestPart String username) throws IOException {
         return new ResponseEntity<>(imageService.saveImage(file, username), HttpStatus.ACCEPTED);
     }
 

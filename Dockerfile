@@ -1,4 +1,4 @@
-FROM openjdk:8
+FROM openjdk:17
 LABEL authors="palla"
 EXPOSE 8080
 ADD target/imgur-gallery-api.jar imgur-gallery-api.jar

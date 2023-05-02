@@ -16,18 +16,27 @@ public class LoggingAspect {
 
     private final Logger log = LoggerFactory.getLogger(LoggingAspect.class);
 
+    /*
+    * Enabled Centralized Logging
+    * Point Cut for catching controller methods
+    */
     @Pointcut(value = "execution(* com.palla.gallery.controller.UserController.*(..) )")
     public void controllerMethodPointCut() {
 
     }
 
+    /*
+     * Enabled Centralized Logging
+     * @Around for catching all point cuts
+     */
     @Around("controllerMethodPointCut()")
     public Object applicationLogger(ProceedingJoinPoint pjp) throws Throwable {
         ObjectMapper mapper = new ObjectMapper();
         String methodName = pjp.getSignature().getName();
         String className = pjp.getTarget().getClass().toString();
-        Object[] array = pjp.getArgs();
+        Object[] array = pjp.getArgs(); // Fetching Method Arguments
 
+        // Enabled Stopwatch for calculation method execution time
         StopWatch watch = new StopWatch(getClass().getSimpleName());
 
         log.info(className + " : " + methodName + "() ---> Arguments( " + mapper.writeValueAsString(array) + " )");

@@ -18,10 +18,7 @@ pipeline {
         }
         stage('Push Docker Image to Hub') {
             steps {
-                withCredentials([string(credentialsId: 'imgur-docker', variable: 'imgurdocker')]) {
-                    bat 'docker login -u palla4you -p Palla@1994'
-                }
-
+                bat 'docker login -u palla4you -p ${password}'
                 bat 'docker push palla4you/imgur-gallery-api'
             }
         }

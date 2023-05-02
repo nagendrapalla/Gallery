@@ -119,6 +119,7 @@
                 </configuration>
             </plugin>
         </plugins>
+        <finalName>imgur-gallery-api</finalName>
     </build>
 
 </project>

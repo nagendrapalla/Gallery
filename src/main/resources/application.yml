@@ -23,14 +23,24 @@ spring:
     type: redis
 
   kafka:
+    consumer:
+      bootstrap-servers: localhost:9092
+      group-id: group-id
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring:
+          json:
+            trusted.packages=*
     producer:
       bootstrap-servers: localhost:9092
-      key-serializer: org.apache.kafka.common.serialization.StringDeserializer
-      value-serializer: org.apache.kafka.common.serialization.StringDeserializer
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
 
 imgur:
-  client_id:
-  client_secret:
-  refresh_token:
+  client_id: 96977297c28bb0a
+  client_secret: 76d50df7fc770a914c5af4169ee0148ebaf4d390
+  refresh_token: 6afc38ec7b60146d3017d0ae625191692fdef153
   grant_type: refresh_token
   host_url: https://api.imgur.com/

@@ -12,6 +12,7 @@ import com.palla.gallery.repository.ImageRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -84,7 +85,7 @@ public class ImageService {
      * */
     public List<ImageDto> saveImages(List<MultipartFile> files, String user) throws UserNotFoundException {
         LOGGER.info("ImageService: saveImages() --> Bulk Images upload processing started");
-        List<Image> uploadedImages = files.parallelStream().map(file -> {
+        List<Image> uploadedImages = files.stream().map(file -> {
             try {
                 return uploadImage(file, user);
             } catch (IOException e) {
@@ -138,5 +139,10 @@ public class ImageService {
         img.setUser(user);
         return img;
     }
+
+//    @KafkaListener(topics = "imgur_api_topic", groupId = "group-id")
+//    public void consume(String message) {
+//        System.out.printf("User created -> %s", message);
+//    }
 
 }
